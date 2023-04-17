@@ -9,20 +9,6 @@ export const people: Person[] = [
     happinessLevel: 80
   },
   {
-    name: 'Bob',
-    category: 'Manager',
-    company: 'Microsoft',
-    companyLogo: 'https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/logo.aspx',
-    happinessLevel: 70
-  },
-  {
-    name: 'Charlie',
-    category: 'Employee',
-    company: 'Amazon',
-    companyLogo: 'https://www.amazon.com/gp/help/customer/display.html?nodeId=202029230',
-    happinessLevel: 60
-  },
-  {
     name: 'Dave',
     category: 'Manager',
     company: 'Apple',
@@ -84,5 +70,19 @@ export const people: Person[] = [
     company: 'VMware',
     companyLogo: 'https://www.vmware.com/content/dam/digitalmarketing/vmware/en/images/meta/vmware-logo.jpg',
     happinessLevel: 80
+  },
+  {
+    name: 'Bob',
+    category: 'Manager',
+    company: 'Microsoft',
+    companyLogo: 'https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/logo.aspx',
+    happinessLevel: 70
+  },
+  {
+    name: 'Charlie',
+    category: 'Employee',
+    company: 'Amazon',
+    companyLogo: 'https://www.amazon.com/gp/help/customer/display.html?nodeId=202029230',
+    happinessLevel: 60
   }
 ]
