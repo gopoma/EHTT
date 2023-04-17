@@ -1,1 +1,1 @@
-export * from './SortTable'
+export * from './PeopleTable'

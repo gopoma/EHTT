@@ -1,26 +1,28 @@
-import { type FC } from 'react'
+import { useState, type FC, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
-import { type Item } from '../interfaces'
 import { ArrowDownIcon, ArrowUpIcon } from './icons'
-import { useSortTable } from '../hooks'
+import { useSorting } from '../hooks'
+import { type Person } from '../interfaces'
+import { getPeople } from '../services'
 
-interface Props {
-  items: Item[]
-}
-
-export const SortTable: FC<Props> = ({ items }) => {
+export const PeopleTable: FC = () => {
+  const [people, setPeople] = useState<Person[]>([])
   const {
-    $items,
+    sortedItems,
     sortingCriterias,
     onSortingCriteriaElementClick
-  } = useSortTable({ items })
+  } = useSorting<Person>(people)
 
-  if ($items.length === 0 || sortingCriterias === null) {
+  useEffect(() => {
+    getPeople()
+      .then(setPeople)
+      .catch(console.log)
+  }, [])
+
+  if (sortedItems.length === 0) {
     return <></>
   }
-
-  const [$firstItem] = $items
 
   return (
     <>
@@ -28,7 +30,7 @@ export const SortTable: FC<Props> = ({ items }) => {
         <thead>
           <tr>
             {
-              Object.keys($firstItem).map((key) => (
+              Object.keys(people[0]).map((key) => (
                 <th
                   key={ key }
                   className='p-2 border border-black'
@@ -36,11 +38,11 @@ export const SortTable: FC<Props> = ({ items }) => {
                   <section className='flex gap-2 place-items-center'>
                     <span>{ key }</span>
                     <span
-                      onClick={onSortingCriteriaElementClick(key)}
+                      onClick={onSortingCriteriaElementClick(key as keyof Person)}
                       className='cursor-pointer'
                     >
                       {
-                        (sortingCriterias[key])
+                        (sortingCriterias[key as keyof Person])
                           ? <ArrowUpIcon style={{ width: '15px', height: '15px' }} />
                           : <ArrowDownIcon style={{ width: '15px', height: '15px' }} />
                       }
@@ -53,10 +55,10 @@ export const SortTable: FC<Props> = ({ items }) => {
         </thead>
         <tbody>
             {
-              $items.map(($item) => (
+              sortedItems.map((sortedItem) => (
                 <tr key={ uuidv4() }>
                   {
-                    Object.values($item).map((value) => (
+                    Object.values(sortedItem).map((value) => (
                       <td
                         key={ uuidv4() }
                         className='p-2 border border-black'

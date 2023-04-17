@@ -1,1 +1,1 @@
-export * from './useSortTable'
+export * from './useSorting'
