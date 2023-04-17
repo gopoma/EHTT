@@ -2,6 +2,7 @@ import type { Person } from '../interfaces'
 
 export const people: Person[] = [
   {
+    id: '1',
     name: 'Alice',
     category: 'Employee',
     company: 'Google',
@@ -9,6 +10,7 @@ export const people: Person[] = [
     happinessLevel: 80
   },
   {
+    id: '2',
     name: 'Dave',
     category: 'Manager',
     company: 'Apple',
@@ -16,6 +18,7 @@ export const people: Person[] = [
     happinessLevel: 90
   },
   {
+    id: '3',
     name: 'Eve',
     category: 'Employee',
     company: 'IBM',
@@ -23,6 +26,7 @@ export const people: Person[] = [
     happinessLevel: 80
   },
   {
+    id: '4',
     name: 'Frank',
     category: 'Manager',
     company: 'Cisco',
@@ -30,6 +34,7 @@ export const people: Person[] = [
     happinessLevel: 70
   },
   {
+    id: '5',
     name: 'Grace',
     category: 'Employee',
     company: 'Facebook',
@@ -37,6 +42,7 @@ export const people: Person[] = [
     happinessLevel: 60
   },
   {
+    id: '6',
     name: 'Harry',
     category: 'Manager',
     company: 'Intel',
@@ -44,6 +50,7 @@ export const people: Person[] = [
     happinessLevel: 90
   },
   {
+    id: '7',
     name: 'Irene',
     category: 'Employee',
     company: 'Oracle',
@@ -51,6 +58,7 @@ export const people: Person[] = [
     happinessLevel: 80
   },
   {
+    id: '8',
     name: 'Jack',
     category: 'Manager',
     company: 'HP',
@@ -58,6 +66,7 @@ export const people: Person[] = [
     happinessLevel: 70
   },
   {
+    id: '9',
     name: 'Kate',
     category: 'Employee',
     company: 'Dell',
@@ -65,6 +74,7 @@ export const people: Person[] = [
     happinessLevel: 50
   },
   {
+    id: '10',
     name: 'Liam',
     category: 'Manager',
     company: 'VMware',
@@ -72,6 +82,7 @@ export const people: Person[] = [
     happinessLevel: 80
   },
   {
+    id: '11',
     name: 'Bob',
     category: 'Manager',
     company: 'Microsoft',
@@ -79,6 +90,7 @@ export const people: Person[] = [
     happinessLevel: 70
   },
   {
+    id: '12',
     name: 'Charlie',
     category: 'Employee',
     company: 'Amazon',

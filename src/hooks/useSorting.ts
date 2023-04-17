@@ -45,7 +45,9 @@ export const useSorting = <T extends Record<string, any>>(items: T[] = []) => {
           return currentSortingCriteriaValue ? firstComparator.localeCompare(secondComparator) : secondComparator.localeCompare(firstComparator)
         }
         default: {
-          throw new TypeError('[TypeError] Unexpected Type')
+          const DEFAULT_VALUE = 0
+
+          return DEFAULT_VALUE
         }
       }
     })

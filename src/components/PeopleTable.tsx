@@ -69,11 +69,11 @@ export const PeopleTable: FC = () => {
         <tbody>
             {
               sortedItems.map((sortedItem) => {
-                return (<tr key={ uuidv4() }>
+                return (<tr key={ sortedItem.id }>
                   {
                     Object.entries(sortedItem).map(([key, value]) => {
                       if (!(selectedFields[key as keyof Person] as boolean)) {
-                        return <React.Fragment key={ key }></React.Fragment>
+                        return <React.Fragment key={ uuidv4() }></React.Fragment>
                       }
 
                       return (<td
