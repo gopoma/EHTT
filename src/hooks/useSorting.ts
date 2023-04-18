@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 // eslint-disable-next-line
-export const useSorting = <T extends Record<string, any>>(items: T[] = []) => {
+export const useSorting = <T extends Record<string, any>>({ items = [] }: { items: T[] }) => {
   const [sortedItems, setSortedItems] = useState<T[]>(items)
 
   type SortingCriterias = Record<keyof T, boolean>

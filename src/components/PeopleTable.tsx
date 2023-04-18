@@ -1,76 +1,35 @@
-import React, { useState, type FC, useEffect, type ChangeEvent } from 'react'
+import React, { useState, type FC, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 import { ArrowDownIcon, ArrowUpIcon } from './icons'
-import { useSorting } from '../hooks'
+import { useSearching, useSorting } from '../hooks'
 import { type Person } from '../interfaces'
 import { getPeople } from '../services'
 
-const selectedFields: Partial<Record<keyof Person, boolean>> = {
-  category: true,
-  company: true,
-  happinessLevel: true,
-  name: true
-}
+const selectedFields: Array<keyof Person> = ['name', 'category', 'company', 'happinessLevel']
 
 export const PeopleTable: FC = () => {
   const [people, setPeople] = useState<Person[]>([])
   const {
+    searchFilterCriteria,
+    searchResults,
+    onSearchFilterFieldChange,
+    onSearchFilterValueChange
+  } = useSearching<Person>({ items: people })
+
+  const {
     sortedItems,
     sortingCriterias,
     onSortingCriteriaElementClick
-  } = useSorting<Person>(people)
+  } = useSorting<Person>({ items: searchResults })
+
+  console.log('sortedItems', sortedItems)
 
   useEffect(() => {
     getPeople()
       .then(setPeople)
       .catch(console.log)
   }, [])
-
-  interface SearchFilterCriteria {
-    field: string
-    value: string
-  }
-  const initialSearchFilterCriteria: SearchFilterCriteria = {
-    field: '',
-    value: ''
-  }
-  const [searchFilterCriteria, setSearchFilterCriteria] = useState<SearchFilterCriteria>(initialSearchFilterCriteria)
-  const [searchResults, setSearchResults] = useState<Person[]>(sortedItems)
-
-  const onSearchFilterFieldChange = ({ target: { value: searchFilterField } }: ChangeEvent<HTMLSelectElement>): void => {
-    setSearchFilterCriteria((prevSearchFilterCriteria) => ({
-      ...prevSearchFilterCriteria,
-      field: searchFilterField
-    }))
-  }
-
-  const onSearchFilterValueChange = ({ target: { value: searchFilterValue } }: ChangeEvent<HTMLInputElement>): void => {
-    setSearchFilterCriteria((prevSearchFilterCriteria) => ({
-      ...prevSearchFilterCriteria,
-      value: searchFilterValue
-    }))
-  }
-
-  useEffect(() => {
-    const { field, value } = searchFilterCriteria
-
-    if (field === '' || value === '') {
-      setSearchResults([])
-      return
-    }
-
-    const newSearchResults = sortedItems.filter((sortedItem) => sortedItem[field as keyof Person].toString().toLowerCase().includes(value.toLowerCase()))
-
-    setSearchResults(newSearchResults)
-  }, [searchFilterCriteria])
-
-  useEffect(() => {
-  }, [searchResults])
-
-  if (sortedItems.length === 0) {
-    return <></>
-  }
 
   return (
     <section className='flex flex-col gap-4 p-4'>
@@ -85,7 +44,7 @@ export const PeopleTable: FC = () => {
               <>
                 <option value=''>Choose a Field</option>
                 {
-                  Object.keys(people[0]).map((key) => (
+                  selectedFields.map((key) => (
                     <option
                       key={ key }
                       value={ key }
@@ -99,9 +58,10 @@ export const PeopleTable: FC = () => {
           </select>
           <input
             type='text'
-            className='w-[25%] border border-black py-2 px-3'
+            className='w-[25%] border border-black py-2 px-3 disabled:bg-slate-200'
             value={searchFilterCriteria.value}
             onChange={onSearchFilterValueChange}
+            disabled={searchFilterCriteria.field === ''}
           />
         </section>
       </section>
@@ -109,52 +69,42 @@ export const PeopleTable: FC = () => {
         <thead>
           <tr>
             {
-              Object.keys(people[0]).map((key) => {
-                if (!(selectedFields[key as keyof Person] as boolean)) {
-                  return <React.Fragment key={ key }></React.Fragment>
-                }
-
-                return (
-                  <th
-                    key={ key }
-                    className='p-2 border border-black'
-                  >
-                    <section className='flex gap-2 place-items-center'>
-                      <span>{ key }</span>
-                      <span
-                        onClick={onSortingCriteriaElementClick(key as keyof Person)}
-                        className='cursor-pointer'
-                      >
-                        {
-                          (sortingCriterias[key as keyof Person])
-                            ? <ArrowUpIcon style={{ width: '15px', height: '15px' }} />
-                            : <ArrowDownIcon style={{ width: '15px', height: '15px' }} />
-                        }
-                      </span>
-                    </section>
-                  </th>
-                )
-              })
+              selectedFields.map((key) => (
+                <th
+                  key={ key }
+                  className='p-2 border border-black'
+                >
+                  <section className='flex gap-2 place-items-center'>
+                    <span>{ key }</span>
+                    <span
+                      onClick={onSortingCriteriaElementClick(key)}
+                      className='cursor-pointer'
+                    >
+                      {
+                        (sortingCriterias[key])
+                          ? <ArrowUpIcon style={{ width: '15px', height: '15px' }} />
+                          : <ArrowDownIcon style={{ width: '15px', height: '15px' }} />
+                      }
+                    </span>
+                  </section>
+                </th>
+              ))
             }
           </tr>
         </thead>
         <tbody>
             {
-              (searchResults.length !== 0 ? searchResults : sortedItems).map((sortedItem) => {
+              (sortedItems).map((sortedItem) => {
                 return (<tr key={ sortedItem.id }>
                   {
-                    Object.entries(sortedItem).map(([key, value]) => {
-                      if (!(selectedFields[key as keyof Person] as boolean)) {
-                        return <React.Fragment key={ uuidv4() }></React.Fragment>
-                      }
-
-                      return (<td
+                    selectedFields.map((key) => (
+                      <td
                         key={ uuidv4() }
                         className='p-2 border border-black'
                       >
-                        { value }
+                        { sortedItem[key] }
                       </td>)
-                    })
+                    )
                   }
                 </tr>)
               })
