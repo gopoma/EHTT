@@ -10,18 +10,8 @@ const selectedFields: Array<keyof Person> = ['name', 'category', 'company', 'hap
 
 export const PeopleTable: FC = () => {
   const [people, setPeople] = useState<Person[]>([])
-  const {
-    searchFilterCriteria,
-    searchResults,
-    onSearchFilterFieldChange,
-    onSearchFilterValueChange
-  } = useSearching<Person>({ items: people })
-
-  const {
-    sortedItems,
-    sortingCriterias,
-    onSortingCriteriaElementClick
-  } = useSorting<Person>({ items: searchResults })
+  const { searchFilterCriteria, searchResults, onSearchFilterFieldChange, onSearchFilterValueChange } = useSearching<Person>({ items: people })
+  const { sortedItems, sortingCriterias, onSortingCriteriaElementClick } = useSorting<Person>({ items: searchResults })
 
   useEffect(() => {
     getPeople()
@@ -66,6 +56,7 @@ export const PeopleTable: FC = () => {
       <table>
         <thead>
           <tr>
+            <th className='p-2 border border-black'>Favorite?</th>
             {
               selectedFields.map((key) => (
                 <th
@@ -95,14 +86,29 @@ export const PeopleTable: FC = () => {
               (sortedItems).map((sortedItem) => {
                 return (<tr key={ sortedItem.id }>
                   {
-                    selectedFields.map((key) => (
+                    <>
                       <td
                         key={ uuidv4() }
                         className='p-2 border border-black'
                       >
-                        { sortedItem[key] }
-                      </td>)
-                    )
+                        <section className='flex justify-center items-center'>
+                          <input
+                            type='checkbox'
+                            className='w-4 h-4'
+                          />
+                        </section>
+                      </td>
+                      {
+                        selectedFields.map((key) => (
+                          <td
+                            key={ uuidv4() }
+                            className='p-2 border border-black'
+                          >
+                            { sortedItem[key] }
+                          </td>)
+                        )
+                      }
+                    </>
                   }
                 </tr>)
               })
