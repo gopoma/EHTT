@@ -1,6 +1,7 @@
 import { type FC } from 'react'
 import { useModalStore } from '../hooks/useModalStore'
 import { TemplateModal } from './TemplateModal'
+import { FavoritesTable } from './'
 
 export const CustomModal: FC = () => {
   const { component } = useModalStore()
@@ -9,7 +10,7 @@ export const CustomModal: FC = () => {
     case 'favorites': {
       return (
         <TemplateModal>
-          <h1>Favorites</h1>
+          <FavoritesTable />
         </TemplateModal>
       )
     }
