@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import favoritesReducer from './favorites/favoritesSlice'
+import modalReducer from './modal/modalSlice'
 
 export const store = configureStore({
   reducer: {
-    favorites: favoritesReducer
+    favorites: favoritesReducer,
+    modal: modalReducer
   }
 })
 

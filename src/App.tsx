@@ -1,11 +1,13 @@
-import { PeopleTable } from './components'
+import { CustomModal, Navbar, PeopleTable } from './components'
 
 function App (): JSX.Element {
   return (
     <>
-      <h1 className='text-3xl'>EHTT</h1>
+      <Navbar />
 
       <PeopleTable />
+
+      <CustomModal />
     </>
   )
 }

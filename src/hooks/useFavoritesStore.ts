@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
 import type { Person } from '../interfaces'
 import { onAddFavorite, onDeleteFavorite } from '../store'
-import { useAppDispatch, useAppSelector } from './store'
+import { useAppDispatch, useAppSelector } from './useStore'
 
 // eslint-disable-next-line
-export const useFavorites = () => {
+export const useFavoritesStore = () => {
   const dispatch = useAppDispatch()
   const { favorites } = useAppSelector((state) => state.favorites)
 

@@ -2,7 +2,7 @@ import { type FC, useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 import { ArrowDownIcon, ArrowUpIcon } from './icons'
-import { useFavorites, useSearching, useSorting } from '../hooks'
+import { useFavoritesStore, useSearching, useSorting } from '../hooks'
 import { type Person } from '../interfaces'
 import { getPeople } from '../services'
 
@@ -13,7 +13,7 @@ export const PeopleTable: FC = () => {
   const { searchFilterCriteria, searchResults, onSearchFilterFieldChange, onSearchFilterValueChange } = useSearching<Person>({ items: people })
   const { sortedItems, sortingCriterias, onSortingCriteriaElementClick } = useSorting<Person>({ items: searchResults })
 
-  const { favorites, startTogglingFavorite } = useFavorites()
+  const { favorites, startTogglingFavorite } = useFavoritesStore()
 
   useEffect(() => {
     getPeople()

@@ -5,6 +5,7 @@ specifiers:
   '@reduxjs/toolkit': ^1.9.4
   '@types/react': ^18.0.28
   '@types/react-dom': ^18.0.11
+  '@types/react-modal': ^3.13.1
   '@types/uuid': ^9.0.1
   '@typescript-eslint/eslint-plugin': ^5.43.0
   '@vitejs/plugin-react-swc': ^3.0.0
@@ -19,6 +20,7 @@ specifiers:
   postcss: ^8.4.22
   react: ^18.2.0
   react-dom: ^18.2.0
+  react-modal: ^3.16.1
   react-redux: ^8.0.5
   tailwindcss: ^3.3.1
   typescript: ^4.9.5
@@ -29,6 +31,7 @@ dependencies:
   '@reduxjs/toolkit': 1.9.4_k4ae6lp43ej6mezo3ztvx6pykq
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  react-modal: 3.16.1_biqbaboplfbrettd7655fr4n2y
   react-redux: 8.0.5_jlpdlnmgz6kfq77dq7ypembf5a
   uuid: 9.0.0
 
@@ -36,6 +39,7 @@ devDependencies:
   '@redux-devtools/core': 3.13.1_k4ae6lp43ej6mezo3ztvx6pykq
   '@types/react': 18.0.35
   '@types/react-dom': 18.0.11
+  '@types/react-modal': 3.13.1
   '@types/uuid': 9.0.1
   '@typescript-eslint/eslint-plugin': 5.58.0_ze6bmax3gcsfve3yrzu6npguhe
   '@vitejs/plugin-react-swc': 3.3.0_vite@4.2.1
@@ -547,6 +551,12 @@ packages:
     resolution: {integrity: sha512-O38bPbI2CWtgw/OoQoY+BRelw7uysmXbWvw3nLWO21H1HSh+GOlqPuXshJfjmpNlKiiSDG9cc1JZAaMmVdcTlw==}
     dependencies:
       '@types/react': 18.0.35
+
+  /@types/react-modal/3.13.1:
+    resolution: {integrity: sha512-iY/gPvTDIy6Z+37l+ibmrY+GTV4KQTHcCyR5FIytm182RQS69G5ps4PH2FxtC7bAQ2QRHXMevsBgck7IQruHNg==}
+    dependencies:
+      '@types/react': 18.0.35
+    dev: true
 
   /@types/react/18.0.35:
     resolution: {integrity: sha512-6Laome31HpetaIUGFWl1VQ3mdSImwxtFZ39rh059a1MNnKGqBpC88J6NJ8n/Is3Qx7CefDGLgf/KhN/sYCf7ag==}
@@ -1434,6 +1444,10 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
+  /exenv/1.2.2:
+    resolution: {integrity: sha512-Z+ktTxTwv9ILfgKCk32OX3n/doe+OcLTRtqK9pcL+JsP3J1/VW8Uvl4ZjLlKqeW4rzK4oesDOGMEMRIZqtP4Iw==}
+    dev: false
+
   /fast-deep-equal/3.1.3:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
     dev: true
@@ -2004,7 +2018,6 @@ packages:
   /object-assign/4.1.1:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
     engines: {node: '>=0.10.0'}
-    dev: true
 
   /object-hash/3.0.0:
     resolution: {integrity: sha512-RSn9F68PjH9HqtltsSnqYC1XXoWe9Bju5+213R98cNGttag9q9yAOTzdbsqvIa7aNm5WffBZFpWYr2aWrklWAw==}
@@ -2227,7 +2240,6 @@ packages:
       loose-envify: 1.4.0
       object-assign: 4.1.1
       react-is: 16.13.1
-    dev: true
 
   /punycode/2.3.0:
     resolution: {integrity: sha512-rRV+zQD8tVFys26lAGR9WUuS4iUAngJScM+ZRSKtvl5tKeZ2t5bvdNFdNHBW9FWR4guGHlgmsZ1G7BSm2wTbuA==}
@@ -2257,6 +2269,25 @@ packages:
 
   /react-is/18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
+
+  /react-lifecycles-compat/3.0.4:
+    resolution: {integrity: sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==}
+    dev: false
+
+  /react-modal/3.16.1_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-VStHgI3BVcGo7OXczvnJN7yT2TWHJPDXZWyI/a0ssFNhGZWsPmB8cF0z33ewDXq4VfYMO1vXgiv/g8Nj9NDyWg==}
+    engines: {node: '>=8'}
+    peerDependencies:
+      react: ^0.14.0 || ^15.0.0 || ^16 || ^17 || ^18
+      react-dom: ^0.14.0 || ^15.0.0 || ^16 || ^17 || ^18
+    dependencies:
+      exenv: 1.2.2
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-lifecycles-compat: 3.0.4
+      warning: 4.0.3
+    dev: false
 
   /react-redux/8.0.5_jlpdlnmgz6kfq77dq7ypembf5a:
     resolution: {integrity: sha512-Q2f6fCKxPFpkXt1qNRZdEDLlScsDWyrgSj0mliK59qU6W5gvBiKkdMEG2lJzhd1rCctf0hb6EtePPLZ2e0m1uw==}
@@ -2716,6 +2747,12 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
+
+  /warning/4.0.3:
+    resolution: {integrity: sha512-rpJyN222KWIvHJ/F53XSZv0Zl/accqHR8et1kpaMTD/fLCRxtV8iX8czMzY7sVZupTI3zcUTg8eycS2kNF9l6w==}
+    dependencies:
+      loose-envify: 1.4.0
+    dev: false
 
   /which-boxed-primitive/1.0.2:
     resolution: {integrity: sha512-bwZdv0AKLpplFY2KZRX6TvyuN7ojjr7lwkg6ml0roIy9YeuSr7JS372qlNW18UQYzgYK9ziGcerWqZOmEn9VNg==}
