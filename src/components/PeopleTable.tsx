@@ -23,8 +23,6 @@ export const PeopleTable: FC = () => {
     onSortingCriteriaElementClick
   } = useSorting<Person>({ items: searchResults })
 
-  console.log('sortedItems', sortedItems)
-
   useEffect(() => {
     getPeople()
       .then(setPeople)
