@@ -2,7 +2,7 @@ import React, { useState, type FC, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 import { ArrowDownIcon, ArrowUpIcon } from './icons'
-import { useSearching, useSorting } from '../hooks'
+import { useFavorites, useSearching, useSorting } from '../hooks'
 import { type Person } from '../interfaces'
 import { getPeople } from '../services'
 
@@ -13,11 +13,17 @@ export const PeopleTable: FC = () => {
   const { searchFilterCriteria, searchResults, onSearchFilterFieldChange, onSearchFilterValueChange } = useSearching<Person>({ items: people })
   const { sortedItems, sortingCriterias, onSortingCriteriaElementClick } = useSorting<Person>({ items: searchResults })
 
+  const { favorites, startTogglingFavorite } = useFavorites()
+
   useEffect(() => {
     getPeople()
       .then(setPeople)
       .catch(console.log)
   }, [])
+
+  const onToggleFavorite = (person: Person) => () => {
+    startTogglingFavorite(person)
+  }
 
   return (
     <section className='flex flex-col gap-4 p-4'>
@@ -94,6 +100,8 @@ export const PeopleTable: FC = () => {
                         <section className='flex justify-center items-center'>
                           <input
                             type='checkbox'
+                            checked={favorites.some((favorite) => favorite.id === sortedItem.id)}
+                            onChange={onToggleFavorite(sortedItem)}
                             className='w-4 h-4'
                           />
                         </section>

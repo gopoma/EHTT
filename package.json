@@ -11,11 +11,14 @@
     "lint:fix": "pnpm lint --fix"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@redux-devtools/core": "^3.13.1",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@types/uuid": "^9.0.1",
